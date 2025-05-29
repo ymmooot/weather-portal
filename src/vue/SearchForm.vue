@@ -25,11 +25,11 @@ watch(() => props.modelValue, (val) => {
 
 const search = () => {
   emit('update:modelValue', searchText.value.trim());
+  (document.activeElement as HTMLElement)?.blur();
 };
 </script>
 
 <style lang="scss" scoped>
-// 横幅いっぱいに二つ並べる
 .search {
   padding: 1rem;
 
