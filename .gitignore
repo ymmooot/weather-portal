@@ -1,2 +1,3 @@
 # Deno build output
-main.js
+dist/
+node_modules/

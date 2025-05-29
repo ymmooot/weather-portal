@@ -1,7 +1,4 @@
-const main = () => {
-    console.log('hi');    
-}
+import { createApp } from "vue";
+import App from "./vue/App.vue";
 
-if (typeof window !== 'undefined') {
-    globalThis.addEventListener('DOMContentLoaded', main);
-}
+createApp(App).mount("#app");
