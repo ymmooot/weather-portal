@@ -14,19 +14,20 @@
 import { ref, watch } from 'vue';
 import Card from './Card.vue';
 import SearchResultItem from './SearchResultItem.vue';
-import { searchLocation, type Place } from '../search.ts';
+import { useSearch, type Place } from '../search.ts';
 
 const props = defineProps<{
   searchText: string;
 }>();
 
 const places = ref<Place[]>([]);
+const { search } = useSearch();
 
 watch(() => props.searchText, async (v) => {
   if (!v) {
     return;
   }
-  places.value = await searchLocation(v)
+  places.value = await search(v)
 }, {
   immediate: true,
 });

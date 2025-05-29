@@ -1,4 +1,4 @@
-import { loadCache, saveCache } from "./cache.ts";
+import { useLocalStorage } from "@vueuse/core";
 
 export type Place = {
   name: string;
@@ -8,36 +8,59 @@ export type Place = {
   lon: string;
 };
 
-const cache = loadCache();
+export const useHistory = () => {
+  const store = useLocalStorage("search_history_v1", [] as string[]);
+  const add = (query: string) => {
+    const idx = store.value.indexOf(query);
+    if (idx !== -1) {
+      store.value.splice(idx, 1);
+    }
+    store.value.unshift(query);
+    if (store.value.length > 20) store.value.length = 20;
+  };
+  const get = () => {
+    return store.value;
+  };
+  return {
+    add,
+    get,
+  };
+};
 
-function updateCache(query: string, places: Place[]) {
-  cache.set(query, places);
-  saveCache(cache);
-}
-
-export const searchLocation = async (query: string): Promise<Place[]> => {
-  if (cache.has(query)) {
-    return cache.get(query)!;
-  }
-
-  const response = await fetch(
-    `https://nominatim.openstreetmap.org/search?format=json&q=${
-      encodeURIComponent(query)
-    }`,
+export const useSearch = () => {
+  const store = useLocalStorage(
+    "search_location_cache_v1",
+    new Map<string, Place[]>(),
   );
-  if (!response.ok) return [];
-  const res = await response.json();
+  const history = useHistory();
+  const search = async (query: string): Promise<Place[]> => {
+    if (store.value.has(query)) {
+      history.add(query);
+      return store.value.get(query)!;
+    }
 
-  // deno-lint-ignore no-explicit-any
-  const places = res.map((item: any) => ({
-    name: item.name,
-    display_name: item.display_name,
-    addresstype: item.type,
-    lat: item.lat,
-    lon: item.lon,
-  }));
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${
+        encodeURIComponent(query)
+      }`,
+    );
+    if (!response.ok) return [];
+    const res = await response.json();
 
-  updateCache(query, places);
+    // deno-lint-ignore no-explicit-any
+    const places = res.map((item: any) => ({
+      name: item.name,
+      display_name: item.display_name,
+      addresstype: item.type,
+      lat: item.lat,
+      lon: item.lon,
+    }));
 
-  return places;
+    store.value.set(query, places);
+    history.add(query);
+
+    return places;
+  };
+
+  return { search, history };
 };
