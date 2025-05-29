@@ -10,8 +10,8 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         api: "modern",
-      }
-    }
+      },
+    },
   },
   build: {
     outDir: "../dist",
