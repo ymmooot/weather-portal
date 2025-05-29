@@ -57,7 +57,9 @@ export const useSearch = () => {
     }));
 
     store.value.set(query, places);
-    history.add(query);
+    if (places.length > 0) {
+      history.add(query);
+    }
 
     return places;
   };
