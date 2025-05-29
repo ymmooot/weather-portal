@@ -19,16 +19,24 @@
         <img src="/wn.svg" alt="ウェザーニュース"><span>WN</span>
       </a>
     </div>
+
+    <StarIcon class="item__star" :active="isFav" @click="emit('fav', place)"/>
   </Card>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import Card from './Card.vue';
+import StarIcon from './StarIcon.vue';
 import { type Place } from '../search.ts';
 
 const props = defineProps<{
   place: Place;
+  isFav?: boolean;
+}>();
+
+const emit = defineEmits<{
+  (e: 'fav', placeID: Place): void;
 }>();
 
 const detail = computed((): string => {
@@ -56,6 +64,8 @@ const weatherNewsLink = computed(() => {
 
 <style lang="scss" scoped>
 .item {
+  position: relative;
+
   &__info-main {
     display: flex;
     align-items: flex-start;
@@ -119,6 +129,15 @@ const weatherNewsLink = computed(() => {
     &:hover {
       opacity: 0.8;
     }
+  }
+
+  &__star {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
   }
 }
 </style>

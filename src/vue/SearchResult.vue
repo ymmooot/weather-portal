@@ -3,11 +3,10 @@
     <h2 class="result__title">「{{ searchText }}」の検索結果</h2>
     <ul>
       <li class="result__item" v-for="place, i in places" :key="i">
-        <SearchResultItem :place="place" />
+        <SearchResultItem :place="place" @fav="toggleFav" :is-fav="isFav(place)"/>
       </li>
     </ul>
   </div>
-
 </template>
 
 <script setup lang="ts">
@@ -15,6 +14,7 @@ import { ref, watch } from 'vue';
 import Card from './Card.vue';
 import SearchResultItem from './SearchResultItem.vue';
 import { useSearch, type Place } from '../search.ts';
+import { useFav } from '../fav.ts';
 
 const props = defineProps<{
   searchText: string;
@@ -22,6 +22,7 @@ const props = defineProps<{
 
 const places = ref<Place[]>([]);
 const { search } = useSearch();
+const { toggle: toggleFav, isFav } = useFav();
 
 watch(() => props.searchText, async (v) => {
   if (!v) {
