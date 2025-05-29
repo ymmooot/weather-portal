@@ -27,6 +27,8 @@ export const useHistory = () => {
   };
 };
 
+const isJapan = (detail: string) => detail.endsWith("日本");
+
 export const useSearch = () => {
   const store = useLocalStorage(
     "search_location_cache_v1",
@@ -54,7 +56,7 @@ export const useSearch = () => {
       addresstype: item.type,
       lat: item.lat,
       lon: item.lon,
-    }));
+    })).filter((place: Place) => isJapan(place.display_name));
 
     store.value.set(query, places);
     if (places.length > 0) {
