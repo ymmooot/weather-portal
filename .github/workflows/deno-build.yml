@@ -1,0 +1,30 @@
+name: Build main.js with Deno
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - name: Build main.js from src/main.ts
+        run: deno bundle src/main.ts main.js
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: main.js
+          path: main.js
+      - name: Commit and push main.js
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add main.js
+          git commit -m 'build: update main.js [skip ci]' || echo 'No changes to commit'
+          git push
