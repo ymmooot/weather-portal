@@ -20,7 +20,9 @@ const searchText = ref('');
 <style scoped lang="scss">
 .app {
   &__main {
-    margin: 1rem;
+    margin: 1rem auto;
+    max-width: 800px;
+    padding: 0 1rem;
   }
 }
 </style>

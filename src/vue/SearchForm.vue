@@ -37,7 +37,6 @@ const search = () => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
   }
 
   &__input {
