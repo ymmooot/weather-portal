@@ -23,8 +23,9 @@ const commitHash = __COMMIT_HASH__;
   }
 
   &__version {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     color:  #999;
+    margin-top: 4px;
     padding-bottom: 10px;
   }
 }
