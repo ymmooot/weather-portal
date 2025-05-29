@@ -18,12 +18,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Deno
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v2
         with:
-          deno-version: v1.x
+          deno-version: v2.x
 
-      - name: Build main.js from src/main.ts
-        run: deno bundle src/main.ts main.js
+      - name: Build application
+        run: deno install && deno task build
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -31,7 +31,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: dist
 
       - name: Deploy to GitHub Pages
         id: deployment
