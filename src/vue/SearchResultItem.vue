@@ -15,6 +15,9 @@
       <a class="item__action-button" :href="windyLink" target="_blank" rel="noopener noreferrer">
         <img src="/windy.png" alt="Windy"><span>Windy</span>
       </a>
+      <a class="item__action-button" :href="weatherNewsLink" target="_blank" rel="noopener noreferrer">
+        <img src="/wn.svg" alt="ウェザーニュース"><span>WN</span>
+      </a>
     </div>
   </Card>
 </template>
@@ -43,9 +46,11 @@ const scwLink = computed((): string => {
   return `https://supercweather.com/?lat=${props.place.lat}&lng=${props.place.lon}`;
 });
 const windyLink = computed((): string => {
-  // https://www.windy.com/35.474/139.163
   return `https://www.windy.com/${props.place.lat}/${props.place.lon}`;
 });
+const weatherNewsLink = computed(() => {
+  return `https://weathernews.jp/onebox/${props.place.lat}/${props.place.lon}`;
+})
 
 </script>
 

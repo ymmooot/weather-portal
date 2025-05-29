@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <p class="footer__text">Created by
-      <a href="https://github.com/ymmooot">ymmooot</a>
+      <a href="https://github.com/ymmooot" target="_blank" rel="noopener noreferrer">ymmooot</a>
     </p>
     <p class="footer__version">Version: {{ commitHash }}</p>
   </footer>

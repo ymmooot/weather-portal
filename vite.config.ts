@@ -8,6 +8,7 @@ export default defineConfig({
   base: "/weather-portal",
   plugins: [vue()],
   server: {
+    host: true,
     port: 8000,
   },
   define: {
