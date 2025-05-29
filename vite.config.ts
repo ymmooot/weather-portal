@@ -6,6 +6,13 @@ export default defineConfig({
   server: {
     port: 8000,
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: "modern",
+      }
+    }
+  },
   build: {
     outDir: "../dist",
     emptyOutDir: true,
