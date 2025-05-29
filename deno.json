@@ -1,0 +1,6 @@
+{
+  "tasks": {
+    "dev": "deno run -A build/bundler.ts",
+    "serve": "deno serve --port 8000"
+  }
+}  

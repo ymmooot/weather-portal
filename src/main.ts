@@ -3,5 +3,5 @@ const main = () => {
 }
 
 if (typeof window !== 'undefined') {
-    window.addEventListener('DOMContentLoaded', main);
+    globalThis.addEventListener('DOMContentLoaded', main);
 }
