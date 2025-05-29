@@ -15,13 +15,13 @@ const menuOpened = defineModel<boolean>();
 
 <style scoped lang="scss">
 .header {
+  height: 50px;
   position: relative;
   background: #fff;
   border-bottom: 1px solid #d8d8d8;
   color: #333;
-  padding: 0.6rem 0;
+  padding: 0.9rem 0 0.6rem;
   text-align: center;
-  margin-top: 4px;
 
   &__title {
     font-size: 1.5rem;
@@ -33,7 +33,7 @@ const menuOpened = defineModel<boolean>();
 
   &__menu {
     position: absolute;
-    top: 4px;
+    top: 8px;
     right: 12px;
     z-index: 10001;
   }
