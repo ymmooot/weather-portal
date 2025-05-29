@@ -1,6 +1,7 @@
 # Weather Portal
 
-On this website, you can search for place names and get direct pinpoint links to Windy and SCW for the selected location.
+On this website, you can search for place names and get direct pinpoint links to
+Windy and SCW for the selected location.
 
 # Dev
 
