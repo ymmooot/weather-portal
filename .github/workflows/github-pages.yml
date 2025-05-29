@@ -23,8 +23,13 @@ jobs:
         with:
           deno-version: v2.x
 
+      - name: Export short commit hash
+        run: echo "COMMIT_HASH=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
       - name: Build application
         run: deno install && deno task build
+        env:
+          COMMIT_HASH: ${{ env.COMMIT_HASH }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

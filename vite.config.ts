@@ -1,11 +1,17 @@
 import { defineConfig } from "npm:vite";
 import vue from "npm:@vitejs/plugin-vue";
+import { Env } from "https://deno.land/x/env@v2.2.0/env.js";
+
+const env = new Env();
 
 export default defineConfig({
-  base: "weather-portal",
+  base: "/weather-portal",
   plugins: [vue()],
   server: {
     port: 8000,
+  },
+  define: {
+    __COMMIT_HASH__: JSON.stringify(env.get("COMMIT_HASH", "dev")),
   },
   css: {
     preprocessorOptions: {
