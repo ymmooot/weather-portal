@@ -10,7 +10,7 @@ export type Place = {
 };
 
 export const useHistory = () => {
-  const store = useLocalStorage("search_history_v1", [] as string[]);
+  const store = useLocalStorage("search_history_v2", [] as string[]);
   const add = (query: string) => {
     const idx = store.value.indexOf(query);
     if (idx !== -1) {
@@ -32,7 +32,7 @@ const isJapan = (detail: string) => detail.endsWith("日本");
 
 export const useSearch = () => {
   const store = useLocalStorage(
-    "search_location_cache_v1",
+    "search_location_cache_v2",
     new Map<string, Place[]>(),
   );
   const history = useHistory();

@@ -2,7 +2,7 @@ import { useLocalStorage } from "@vueuse/core";
 import { type Place } from "./search.ts";
 
 export const useFav = () => {
-  const store = useLocalStorage("fav_v1", [] as Place[]);
+  const store = useLocalStorage("fav_v2", [] as Place[]);
   const toggle = (place: Place) => {
     if (store.value.some((p) => p.place_id === place.place_id)) {
       store.value = store.value.filter((p) => p.place_id !== place.place_id);
