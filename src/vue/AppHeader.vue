@@ -35,7 +35,7 @@ const menuOpened = defineModel<boolean>();
     position: absolute;
     top: 8px;
     right: 12px;
-    z-index: 10001;
+    z-index: 10;
   }
 }
 </style>

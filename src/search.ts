@@ -1,6 +1,7 @@
 import { useLocalStorage } from "@vueuse/core";
 
 export type Place = {
+  place_id: string;
   name: string;
   display_name: string;
   addresstype: string;
@@ -51,6 +52,7 @@ export const useSearch = () => {
 
     // deno-lint-ignore no-explicit-any
     const places = res.map((item: any) => ({
+      place_id: item.place_id.toString(),
       name: item.name,
       display_name: item.display_name,
       addresstype: item.type,

@@ -7,24 +7,41 @@
     </main>
     <AppFooter class="app__footer"/>
 
-    <OverlayMenu :show="menuOpened" @close="menuOpened = false" @select="onSelect"/>
+    <SideOverlay :show="menuOpened" @close="menuOpened = false" @select="onSelect"/>
+
+    <!-- Fav -->
+    <button class="app__fav" @click="favListOpened = true">
+      <StarIcon class="app__fav-icon" main-color="#fff"/>
+    </button>
+    <Transition name="up">
+      <FavListOverlay v-show="favListOpened" @close="favListOpened = false" @select="onSelect"/>
+    </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { useScrollLock } from '@vueuse/core'
+
 import AppHeader from './AppHeader.vue';
 import AppFooter from './AppFooter.vue';
 import SearchForm from './SearchForm.vue';
 import SearchResult from './SearchResult.vue';
-import OverlayMenu from './OverlayMenu.vue';
+import SideOverlay from './SideOverlay.vue';
+import FavListOverlay from './FavListOverlay.vue';
+import StarIcon from "./StarIcon.vue";
 
 const searchText = ref('');
 const menuOpened = ref(false);
+const favListOpened = ref(false);
 const onSelect = (item: string) => {
   menuOpened.value = false;
   searchText.value = item;
 }
+const isWindowScollLocked = useScrollLock(window);
+watch(favListOpened, (newVal) => {
+  isWindowScollLocked.value = newVal;
+});
 </script>
 
 <style scoped lang="scss">
@@ -39,5 +56,37 @@ const onSelect = (item: string) => {
   &__footer {
     height: 60px;
   }
+
+  &__fav {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #F9B618;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2  ;
+  }
+
+  &__fav-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Transition for the favorite button */
+.up-enter-active, .up-leave-active {
+  transition: transform 0.3s ease;
+}
+.up-enter-from, .up-leave-to {
+  transform: translateY(100%);
+}
+.up-enter-to, .up-leave-from {
+  transform: translateY(0);
 }
 </style>
