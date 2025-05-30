@@ -8,6 +8,7 @@
 </template>
 
 <script setup lang="ts">
+// @ts-ignore __COMMIT_HASH_ is replaced by Vite during build
 const commitHash = __COMMIT_HASH__;
 </script>
 

@@ -20,7 +20,7 @@
       </a>
     </div>
 
-    <StarIcon class="item__star" :active="isFav" @click="emit('fav', place)"/>
+    <StarIcon class="item__star" :active="isFav ?? false" @click="emit('fav', place)"/>
   </Card>
 </template>
 

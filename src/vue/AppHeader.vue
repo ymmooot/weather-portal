@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <h1 class="header__title">{{ title }}</h1>
-    <MenuButton class="header__menu" v-model="menuOpened"/>
+    <MenuButton class="header__menu" v-model="menuOpened" />
   </header>
 </template>
 
@@ -10,7 +10,7 @@ import MenuButton from './MenuButton.vue';
 const props = defineProps<{
   title: string;
 }>();
-const menuOpened = defineModel<boolean>();
+const menuOpened = defineModel<boolean>({ default: false });
 </script>
 
 <style scoped lang="scss">
@@ -39,4 +39,3 @@ const menuOpened = defineModel<boolean>();
   }
 }
 </style>
-

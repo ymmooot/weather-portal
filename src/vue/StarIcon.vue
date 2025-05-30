@@ -15,7 +15,7 @@ viewBox="40 40 180 180"
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps<{
   active: boolean;

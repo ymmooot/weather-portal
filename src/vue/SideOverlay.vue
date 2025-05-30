@@ -9,6 +9,9 @@
               <p class="menu__history-item">{{ item }}</p>
             </li>
           </ul>
+          <div class="menu__actions">
+            <button class="menu__clear" @click="clear">キャッシュをクリア</button>
+          </div>
         </div>
       </Transition>
     </div>
@@ -17,14 +20,25 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
+import { useLocalStorage } from "@vueuse/core";
 import { useHistory } from '../search'
+import { allCacheKeys } from '../const'
 
-const props = defineProps<{
+defineProps<{
   show: boolean;
 }>();
 
 const { get } = useHistory();
 const histories = computed(() => get());
+
+const clear = () => {
+  const ok = window.confirm("キャッシュをクリアしますか？\n検索履歴、お気に入りが全て消去されます。");
+  if (!ok) return;
+  allCacheKeys.forEach((key) => {
+    const s = useLocalStorage(key, undefined)
+    s.value = undefined;
+  });
+}
 
 </script>
 
@@ -72,6 +86,27 @@ const histories = computed(() => get());
 
     &:hover {
       background-color: #f0f0f0;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
+  }
+
+  &__clear {
+    padding: 0.5rem 1rem;
+    background-color: gray;
+    font-size: 0.7rem;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
     }
   }
 }

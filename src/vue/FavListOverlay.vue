@@ -22,7 +22,7 @@ const emit = defineEmits<{
   (e: 'select', item: string): void;
 }>();
 
-const { get, isFav, toggle } = useFav();
+const { get, toggle } = useFav();
 const favList = computed(() => get());
 </script>
 
