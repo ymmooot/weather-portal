@@ -1,3 +1,4 @@
+/* stylelint-disable */
 *, ::after, ::before {
   box-sizing: border-box;
 }
@@ -40,3 +41,4 @@ textarea:not([rows]) {
 :target {
   scroll-margin-block: 5ex;
 }
+/* stylelint-enable */

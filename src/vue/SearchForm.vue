@@ -41,30 +41,30 @@ const search = () => {
 
   &__form {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
   }
 
   &__input {
     flex: 1;
     padding: 0.5rem;
+    margin-right: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 0.25rem;
-    margin-right: 0.5rem;
 
     &:focus {
-      border-color: #29ca5f;
       outline: none;
+      border-color: #29ca5f;
     }
   }
 
   &__button {
     padding: 0.5rem 1rem;
-    background-color: #29ca5f;
     color: white;
+    cursor: pointer;
+    background-color: #29ca5f;
     border: none;
     border-radius: 0.25rem;
-    cursor: pointer;
 
     &:hover {
       opacity: 0.8;

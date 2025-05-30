@@ -47,7 +47,7 @@
 import { computed, ref } from "vue";
 import Card from "./Card.vue";
 import StarIcon from "./StarIcon.vue";
-import { type Place } from "../search.ts";
+import { type Place } from "../search";
 
 const props = defineProps<{
   place: Place;
@@ -86,10 +86,10 @@ const weatherNewsLink = computed(() => {
 
   &__info-main {
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    align-items: center;
     gap: 4px;
+    align-items: flex-start;
+    align-items: center;
+    justify-content: flex-start;
   }
 
   &__name {
@@ -99,19 +99,19 @@ const weatherNewsLink = computed(() => {
 
   &__tag {
     display: inline-block;
+    padding: 0.1rem 0.4rem;
+    margin-top: 0.2rem;
     font-size: 0.6rem;
     color: #fff;
-    background-color: #29ca5f;
-    margin-top: 0.2rem;
-    padding: 0.1rem 0.4rem;
-    border-radius: 6px;
     text-transform: capitalize;
+    background-color: #29ca5f;
+    border-radius: 6px;
   }
 
   &__detail {
+    margin-top: 0.2rem;
     font-size: 0.9rem;
     color: #666;
-    margin-top: 0.2rem;
   }
 
   &__latlon {
@@ -121,22 +121,22 @@ const weatherNewsLink = computed(() => {
 
   &__actions {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-top: 0.5rem;
     gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 0.5rem;
   }
 
   &__action-button {
     display: inline-flex;
-    align-items: center;
     gap: 8px;
+    align-items: center;
     padding: 0.4rem 0.6rem;
-    color: #666;
-    border: 1px solid #ccc;
-    text-decoration: none;
-    border-radius: 4px;
     font-size: 0.8rem;
+    color: #666;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 
     img {
       width: 1.2rem;

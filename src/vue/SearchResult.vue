@@ -4,11 +4,7 @@
       <h2 class="result__title">「{{ searchText }}」の検索結果</h2>
       <ul v-if="places.length">
         <li class="result__item" v-for="(place, i) in places" :key="i">
-          <SearchResultItem
-            :place="place"
-            @fav="toggleFav"
-            :is-fav="isFav(place)"
-          />
+          <SearchResultItem :place="place" @fav="toggleFav" :is-fav="isFav(place)" />
         </li>
       </ul>
       <div v-else class="result__noitem">
@@ -23,10 +19,9 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import Card from "./Card.vue";
 import SearchResultItem from "./SearchResultItem.vue";
-import { type Place, useSearch } from "../search.ts";
-import { useFav } from "../fav.ts";
+import { type Place, useSearch } from "../search";
+import { useFav } from "../fav";
 
 const props = defineProps<{
   searchText: string;
@@ -51,9 +46,9 @@ watch(() => props.searchText, async (v) => {
   margin-top: 20px;
 
   &__title {
+    padding-bottom: 0.5rem;
     font-size: 0.9rem;
     border-bottom: 2px solid #29ca5f;
-    padding-bottom: 0.5rem;
   }
 
   &__item {
@@ -62,10 +57,10 @@ watch(() => props.searchText, async (v) => {
   }
 
   &__noitem {
-    margin-top: 1.2rem;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    margin-top: 1.2rem;
     font-size: 0.9rem;
   }
 }

@@ -31,12 +31,13 @@ const favList = computed(() => get());
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1000;
   width: 100dvw;
   height: 100dvh;
-  background: #f0f4f8;
-  z-index: 1000;
-  overflow-y: auto;
   padding-bottom: 1rem;
+  overflow-y: auto;
+  overscroll-behavior-y: none;
+  background: #f0f4f8;
 
   &__header {
     background-color: #fff;
@@ -48,25 +49,25 @@ const favList = computed(() => get());
     left: 12px;
     width: 30px;
     height: 30px;
-    background: none;
-    border: none;
     font-size: 1.5rem;
     cursor: pointer;
+    background: none;
+    border: none;
   }
 
   &__title {
-    font-size: 1rem;
-    font-optical-sizing: auto;
-    font-style: normal;
-    text-align: center;
     padding: 0.8rem;
+    font-size: 1rem;
+    font-style: normal;
+    font-optical-sizing: auto;
+    text-align: center;
     border-bottom: 1px solid #d8d8d8;
   }
 
   &__list {
-    margin: 0 auto;
     max-width: 800px;
     padding: 0 1rem;
+    margin: 0 auto;
   }
 
   &__item {
@@ -82,12 +83,12 @@ const favList = computed(() => get());
 
 .batsu::before,
 .batsu::after {
-  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   width: 2px;
   height: 30px;
+  content: "";
   background: #333;
 }
 

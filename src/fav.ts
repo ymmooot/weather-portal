@@ -14,8 +14,7 @@ export const useFav = () => {
   const get = () => {
     return store.value;
   };
-  const isFav = (place: Place) =>
-    store.value.some((p) => p.place_id === place.place_id);
+  const isFav = (place: Place) => store.value.some((p) => p.place_id === place.place_id);
   return {
     toggle,
     get,

@@ -49,9 +49,7 @@ export const useSearch = () => {
     }
 
     const response = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&q=${
-        encodeURIComponent(query)
-      }`,
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`,
     );
     if (!response.ok) {
       searching.value = false;

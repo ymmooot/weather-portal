@@ -79,10 +79,10 @@ syncFavWithHash();
 <style scoped lang="scss">
 .app {
   &__main {
-    margin: 0 auto;
     max-width: 800px;
-    padding: 1rem 1rem;
     min-height: calc(100dvh - 110px); // 50px header + 60px footer
+    padding: 1rem;
+    margin: 0 auto;
   }
 
   &__footer {
@@ -93,16 +93,16 @@ syncFavWithHash();
     position: fixed;
     bottom: 20px;
     left: 20px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 50px;
     height: 50px;
     background-color: #f9b618;
     border: none;
     border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 40%);
   }
 
   &__fav-icon {
@@ -115,9 +115,11 @@ syncFavWithHash();
 .up-enter-active, .up-leave-active {
   transition: transform 0.3s ease;
 }
+
 .up-enter-from, .up-leave-to {
   transform: translateY(100%);
 }
+
 .up-enter-to, .up-leave-from {
   transform: translateY(0);
 }

@@ -9,9 +9,8 @@
 
 [ymmooot.github.io/weather-portal](https://ymmooot.github.io/weather-portal/)
 
-You can search for place names and get direct links to
-[Windy](https://windy.com), [SCW](https://supercweather.com/), and
-[WN](https://weathernews.jp/) for the selected location.
+You can search for place names and get direct links to [Windy](https://windy.com),
+[SCW](https://supercweather.com/), and [WN](https://weathernews.jp/) for the selected location.
 
 # Dev
 
@@ -22,7 +21,7 @@ This product is built with deno + vite + vue.
 $ deno task dev
 
 # Format code
-$ deno fmt --unstable-component
+$ deno task fmt
 
 # Check TypeScript types
 $ deno check

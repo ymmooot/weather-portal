@@ -21,18 +21,18 @@ const commitHash = __COMMIT_HASH__;
 .footer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 
   &__text {
     font-size: 0.8rem;
   }
 
   &__version {
+    padding-bottom: 10px;
+    margin-top: 4px;
     font-size: 0.6rem;
     color: #999;
-    margin-top: 4px;
-    padding-bottom: 10px;
   }
 }
 </style>

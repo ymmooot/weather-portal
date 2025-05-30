@@ -1,7 +1,7 @@
 body {
-  font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
-  background: #f0f4f8;
-  color: #222;
-  font-size: 14px;
   overscroll-behavior-y: none;
+  font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  font-size: 14px;
+  color: #222;
+  background: #f0f4f8;
 }

@@ -20,34 +20,38 @@ const toggle = () => emit("update:modelValue", !props.modelValue);
 <style scoped lang="scss">
 .menu-button {
   position: relative;
-  width: 2rem;
-  height: 2rem;
-  background: none;
-  border: none;
+  z-index: 10;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 0.3rem;
-  cursor: pointer;
-  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
   padding: 0;
+  cursor: pointer;
+  background: none;
+  border: none;
 }
+
 .bar {
+  position: relative;
   display: block;
   width: 1.6rem;
   height: 0.2rem;
   background: #333;
   border-radius: 2px;
   transition: all 0.3s ease;
-  position: relative;
 }
+
 .bar1.open {
   transform: translateY(0.5rem) rotate(45deg);
 }
+
 .bar2.open {
   opacity: 0;
 }
+
 .bar3.open {
   transform: translateY(-0.5rem) rotate(-45deg);
 }
