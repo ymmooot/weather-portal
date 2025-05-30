@@ -1,5 +1,6 @@
 import { ref } from "vue";
 import { useLocalStorage } from "@vueuse/core";
+import { searchQueryCacheKey, searchResultCacheKey } from "./const.ts";
 
 export type Place = {
   place_id: string;
@@ -11,7 +12,7 @@ export type Place = {
 };
 
 export const useHistory = () => {
-  const store = useLocalStorage("search_history_v2", [] as string[]);
+  const store = useLocalStorage(searchQueryCacheKey, [] as string[]);
   const add = (query: string) => {
     const idx = store.value.indexOf(query);
     if (idx !== -1) {
@@ -33,7 +34,7 @@ const isJapan = (detail: string) => detail.endsWith("日本");
 
 export const useSearch = () => {
   const store = useLocalStorage(
-    "search_location_cache_v2",
+    searchResultCacheKey,
     new Map<string, Place[]>(),
   );
   const history = useHistory();
