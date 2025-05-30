@@ -46,6 +46,7 @@ const histories = computed(() => get());
   max-width: 300px;
   height: 100%;
   background-color: #fff;
+  overflow-y: auto;
 
   &__title {
     font-size: 1rem;

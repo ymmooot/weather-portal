@@ -32,13 +32,20 @@ import FavListOverlay from './FavListOverlay.vue';
 import StarIcon from "./StarIcon.vue";
 
 const searchText = ref('');
+const isWindowScollLocked = useScrollLock(window);
+
+// --- Side Menu Overlay ---
 const menuOpened = ref(false);
-const favListOpened = ref(false);
 const onSelect = (item: string) => {
   menuOpened.value = false;
   searchText.value = item;
 }
-const isWindowScollLocked = useScrollLock(window);
+watch(menuOpened, (v) => {
+  isWindowScollLocked.value = v;
+});
+
+// --- Favorite List Overlay ---
+const favListOpened = ref(false);
 watch(favListOpened, (v) => {
   isWindowScollLocked.value = v;
 
@@ -54,7 +61,6 @@ watch(favListOpened, (v) => {
     history.replaceState(null, '', location.pathname);
   }
 });
-
 const syncFavWithHash = () => {
   favListOpened.value = location.hash === '#fav';
 };
