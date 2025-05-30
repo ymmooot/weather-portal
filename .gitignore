@@ -1,3 +1,4 @@
 # Deno build output
 dist/
 node_modules/
+.vite/
