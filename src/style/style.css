@@ -3,4 +3,5 @@ body {
   background: #f0f4f8;
   color: #222;
   font-size: 14px;
+  overscroll-behavior-y: none;
 }
