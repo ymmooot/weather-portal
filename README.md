@@ -1,5 +1,7 @@
 # Weather Portal
 
+![](https://github.com/ymmooot/weather-portal/blob/main/public/ogp.png)
+
 ![](https://img.shields.io/badge/Deno-464647?logo=deno&logoColor=white)
 ![](https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF)
 ![](https://img.shields.io/badge/Vite-646CFF?logo=Vite&logoColor=white)
@@ -7,8 +9,8 @@
 
 [ymmooot.github.io/weather-portal](https://ymmooot.github.io/weather-portal/)
 
-You can search for place names and get direct pinpoint links to
-[Windy](https://windy.com), [SCW](https://supercweather.com/) and
+You can search for place names and get direct links to
+[Windy](https://windy.com), [SCW](https://supercweather.com/), and
 [WN](https://weathernews.jp/) for the selected location.
 
 # Dev
@@ -21,4 +23,7 @@ $ deno task dev
 
 # Format code
 $ deno fmt --unstable-component
+
+# Check TypeScript types
+$ deno check
 ```
