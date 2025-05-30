@@ -2,19 +2,19 @@
   <button
     class="menu-button"
     :aria-pressed="modelValue"
-    :aria-label="modelValue ? 'メニューを閉じる' : 'メニューを開く'"
+    :aria-label='modelValue ? "メニューを閉じる" : "メニューを開く"'
     @click="toggle"
   >
-    <span :class="['bar', 'bar1', { open: modelValue }]"></span>
-    <span :class="['bar', 'bar2', { open: modelValue }]"></span>
-    <span :class="['bar', 'bar3', { open: modelValue }]"></span>
+    <span :class='["bar", "bar1", { open: modelValue }]'></span>
+    <span :class='["bar", "bar2", { open: modelValue }]'></span>
+    <span :class='["bar", "bar3", { open: modelValue }]'></span>
   </button>
 </template>
 
 <script setup lang="ts">
 const props = defineProps<{ modelValue: boolean }>();
-const emit = defineEmits<{ (e: 'update:modelValue', value: boolean): void }>();
-const toggle = () => emit('update:modelValue', !props.modelValue);
+const emit = defineEmits<{ (e: "update:modelValue", value: boolean): void }>();
+const toggle = () => emit("update:modelValue", !props.modelValue);
 </script>
 
 <style scoped lang="scss">

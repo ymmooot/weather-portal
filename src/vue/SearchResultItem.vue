@@ -9,26 +9,45 @@
       <p class="item__latlon">{{ place.lat }} / {{ place.lon }}</p>
     </div>
     <div class="item__actions">
-      <a class="item__action-button" :href="scwLink" target="_blank" rel="noopener noreferrer">
+      <a
+        class="item__action-button"
+        :href="scwLink"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img src="/scw.png" alt="scw"><span>SCW</span>
       </a>
-      <a class="item__action-button" :href="windyLink" target="_blank" rel="noopener noreferrer">
+      <a
+        class="item__action-button"
+        :href="windyLink"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img src="/windy.png" alt="Windy"><span>Windy</span>
       </a>
-      <a class="item__action-button" :href="weatherNewsLink" target="_blank" rel="noopener noreferrer">
+      <a
+        class="item__action-button"
+        :href="weatherNewsLink"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img src="/wn.svg" alt="ウェザーニュース"><span>WN</span>
       </a>
     </div>
 
-    <StarIcon class="item__star" :active="isFav ?? false" @click="emit('fav', place)"/>
+    <StarIcon
+      class="item__star"
+      :active="isFav ?? false"
+      @click='emit("fav", place)'
+    />
   </Card>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import Card from './Card.vue';
-import StarIcon from './StarIcon.vue';
-import { type Place } from '../search.ts';
+import { computed, ref } from "vue";
+import Card from "./Card.vue";
+import StarIcon from "./StarIcon.vue";
+import { type Place } from "../search.ts";
 
 const props = defineProps<{
   place: Place;
@@ -36,18 +55,18 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: 'fav', placeID: Place): void;
+  (e: "fav", placeID: Place): void;
 }>();
 
 const detail = computed((): string => {
   // 最後の「, 日本」を削除
   if (!props.place.display_name) {
-    return '';
+    return "";
   }
-  if (props.place.display_name.endsWith('日本')) {
+  if (props.place.display_name.endsWith("日本")) {
     return props.place.display_name.slice(0, -4);
   }
-  return props.place.display_name || '';
+  return props.place.display_name || "";
 });
 
 const scwLink = computed((): string => {
@@ -58,8 +77,7 @@ const windyLink = computed((): string => {
 });
 const weatherNewsLink = computed(() => {
   return `https://weathernews.jp/onebox/${props.place.lat}/${props.place.lon}`;
-})
-
+});
 </script>
 
 <style lang="scss" scoped>

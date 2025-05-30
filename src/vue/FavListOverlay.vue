@@ -1,11 +1,11 @@
 <template>
   <div class="menu">
     <div class="menu__header">
-      <button class="menu__close batsu" @click="emit('close')"></button>
+      <button class="menu__close batsu" @click='emit("close")'></button>
       <p class="menu__title">お気に入り</p>
     </div>
     <ul class="menu__list">
-      <li class="menu__item" v-for="place, i in favList" :key="i">
+      <li class="menu__item" v-for="(place, i) in favList" :key="i">
         <SearchResultItem :place="place" is-fav @fav="toggle" />
       </li>
     </ul>
@@ -14,12 +14,12 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { useFav } from '../fav'
-import SearchResultItem from './SearchResultItem.vue';
+import { useFav } from "../fav";
+import SearchResultItem from "./SearchResultItem.vue";
 
 const emit = defineEmits<{
-  (e: 'close'): void;
-  (e: 'select', item: string): void;
+  (e: "close"): void;
+  (e: "select", item: string): void;
 }>();
 
 const { get, toggle } = useFav();

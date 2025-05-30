@@ -1,16 +1,22 @@
 <template>
   <Transition name="fade">
-    <div class="overlay" v-show="show" @click="$emit('close')">
+    <div class="overlay" v-show="show" @click='$emit("close")'>
       <Transition name="slide">
         <div class="menu" v-show="show" @click.stop>
           <p class="menu__title">検索履歴</p>
           <ul class="menu__history">
-            <li v-for="item,i in histories" :key="i" @click="$emit('select', item)">
+            <li
+              v-for="(item, i) in histories"
+              :key="i"
+              @click='$emit("select", item)'
+            >
               <p class="menu__history-item">{{ item }}</p>
             </li>
           </ul>
           <div class="menu__actions">
-            <button class="menu__clear" @click="clear">キャッシュをクリア</button>
+            <button class="menu__clear" @click="clear">
+              キャッシュをクリア
+            </button>
           </div>
         </div>
       </Transition>
@@ -21,8 +27,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useLocalStorage } from "@vueuse/core";
-import { useHistory } from '../search'
-import { allCacheKeys } from '../const'
+import { useHistory } from "../search";
+import { allCacheKeys } from "../const";
 
 defineProps<{
   show: boolean;
@@ -32,14 +38,15 @@ const { get } = useHistory();
 const histories = computed(() => get());
 
 const clear = () => {
-  const ok = window.confirm("キャッシュをクリアしますか？\n検索履歴、お気に入りが全て消去されます。");
+  const ok = window.confirm(
+    "キャッシュをクリアしますか？\n検索履歴、お気に入りが全て消去されます。",
+  );
   if (!ok) return;
   allCacheKeys.forEach((key) => {
-    const s = useLocalStorage(key, undefined)
+    const s = useLocalStorage(key, undefined);
     s.value = undefined;
   });
-}
-
+};
 </script>
 
 <style scoped lang="scss">

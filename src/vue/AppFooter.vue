@@ -1,7 +1,12 @@
 <template>
   <footer class="footer">
-    <p class="footer__text">Created by
-      <a href="https://github.com/ymmooot" target="_blank" rel="noopener noreferrer">ymmooot</a>
+    <p class="footer__text">
+      Created by
+      <a
+        href="https://github.com/ymmooot"
+        target="_blank"
+        rel="noopener noreferrer"
+      >ymmooot</a>
     </p>
     <p class="footer__version">Version: {{ commitHash }}</p>
   </footer>
@@ -25,7 +30,7 @@ const commitHash = __COMMIT_HASH__;
 
   &__version {
     font-size: 0.6rem;
-    color:  #999;
+    color: #999;
     margin-top: 4px;
     padding-bottom: 10px;
   }

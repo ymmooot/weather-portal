@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import MenuButton from './MenuButton.vue';
+import MenuButton from "./MenuButton.vue";
 const props = defineProps<{
   title: string;
 }>();

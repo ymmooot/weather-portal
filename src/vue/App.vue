@@ -1,37 +1,45 @@
 <template>
   <div class="app">
-    <AppHeader title="Weather Portal" v-model="menuOpened"/>
+    <AppHeader title="Weather Portal" v-model="menuOpened" />
     <main class="app__main">
       <SearchForm v-model="searchText" />
-      <SearchResult :search-text="searchText" v-if="searchText"/>
+      <SearchResult :search-text="searchText" v-if="searchText" />
     </main>
-    <AppFooter class="app__footer"/>
+    <AppFooter class="app__footer" />
 
-    <SideOverlay :show="menuOpened" @close="menuOpened = false" @select="onSelect"/>
+    <SideOverlay
+      :show="menuOpened"
+      @close="menuOpened = false"
+      @select="onSelect"
+    />
 
     <!-- Fav -->
     <button class="app__fav" @click="favListOpened = true">
-      <StarIcon class="app__fav-icon" main-color="#fff"/>
+      <StarIcon class="app__fav-icon" active main-color="#fff" />
     </button>
     <Transition name="up">
-      <FavListOverlay v-show="favListOpened" @close="favListOpened = false" @select="onSelect"/>
+      <FavListOverlay
+        v-show="favListOpened"
+        @close="favListOpened = false"
+        @select="onSelect"
+      />
     </Transition>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useScrollLock } from '@vueuse/core'
+import { ref, watch } from "vue";
+import { useScrollLock } from "@vueuse/core";
 
-import AppHeader from './AppHeader.vue';
-import AppFooter from './AppFooter.vue';
-import SearchForm from './SearchForm.vue';
-import SearchResult from './SearchResult.vue';
-import SideOverlay from './SideOverlay.vue';
-import FavListOverlay from './FavListOverlay.vue';
+import AppHeader from "./AppHeader.vue";
+import AppFooter from "./AppFooter.vue";
+import SearchForm from "./SearchForm.vue";
+import SearchResult from "./SearchResult.vue";
+import SideOverlay from "./SideOverlay.vue";
+import FavListOverlay from "./FavListOverlay.vue";
 import StarIcon from "./StarIcon.vue";
 
-const searchText = ref('');
+const searchText = ref("");
 const isWindowScollLocked = useScrollLock(window);
 
 // --- Side Menu Overlay ---
@@ -39,7 +47,7 @@ const menuOpened = ref(false);
 const onSelect = (item: string) => {
   menuOpened.value = false;
   searchText.value = item;
-}
+};
 watch(menuOpened, (v) => {
   isWindowScollLocked.value = v;
 });
@@ -54,17 +62,17 @@ watch(favListOpened, (v) => {
   // - When favListOpened becomes false (close), history.replaceState removes the hash without adding to history
   // - As a result, only the transition from "no hash" to "#fav" is recorded in history, and repeated open/close does not increase history entries
   if (v) {
-    if (location.hash !== '#fav') {
-      location.hash = '#fav';
+    if (location.hash !== "#fav") {
+      location.hash = "#fav";
     }
   } else {
-    history.replaceState(null, '', location.pathname);
+    history.replaceState(null, "", location.pathname);
   }
 });
 const syncFavWithHash = () => {
-  favListOpened.value = location.hash === '#fav';
+  favListOpened.value = location.hash === "#fav";
 };
-window.addEventListener('hashchange', syncFavWithHash);
+window.addEventListener("hashchange", syncFavWithHash);
 syncFavWithHash();
 </script>
 
@@ -87,14 +95,14 @@ syncFavWithHash();
     left: 20px;
     width: 50px;
     height: 50px;
-    background-color: #F9B618;
+    background-color: #f9b618;
     border: none;
     border-radius: 50%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2  ;
+    z-index: 2;
   }
 
   &__fav-icon {

@@ -20,5 +20,5 @@ This product is built with deno + vite + vue.
 $ deno task dev
 
 # Format code
-$ deno fmt
+$ deno fmt --unstable-component
 ```

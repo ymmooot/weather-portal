@@ -1,20 +1,26 @@
 <template>
   <Card class="search">
     <form @submit.prevent="search" class="search__form">
-      <input type="text" placeholder="Where?" v-model.trim="searchText" class="search__input" autofocus/>
+      <input
+        type="text"
+        placeholder="Where?"
+        v-model.trim="searchText"
+        class="search__input"
+        autofocus
+      />
       <button type="submit" class="search__button">Go</button>
     </form>
   </Card>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import Card from './Card.vue';
+import { ref, watch } from "vue";
+import Card from "./Card.vue";
 
 const props = defineProps<{
   modelValue: string;
 }>();
-const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>();
+const emit = defineEmits<{ (e: "update:modelValue", value: string): void }>();
 
 // local state for search text
 const searchText = ref(props.modelValue);
@@ -24,7 +30,7 @@ watch(() => props.modelValue, (val) => {
 });
 
 const search = () => {
-  emit('update:modelValue', searchText.value.trim());
+  emit("update:modelValue", searchText.value.trim());
   (document.activeElement as HTMLElement)?.blur();
 };
 </script>
