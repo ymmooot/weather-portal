@@ -8,7 +8,8 @@
 [ymmooot.github.io/weather-portal](https://ymmooot.github.io/weather-portal/)
 
 You can search for place names and get direct pinpoint links to
-[Windy](https://windy.com), [SCW](https://supercweather.com/) and [WN](https://weathernews.jp/) for the selected location.
+[Windy](https://windy.com), [SCW](https://supercweather.com/) and
+[WN](https://weathernews.jp/) for the selected location.
 
 # Dev
 

@@ -1,11 +1,17 @@
 <template>
   <div class="result">
-    <h2 class="result__title">「{{ searchText }}」の検索結果</h2>
-    <ul>
-      <li class="result__item" v-for="place, i in places" :key="i">
-        <SearchResultItem :place="place" @fav="toggleFav" :is-fav="isFav(place)"/>
-      </li>
-    </ul>
+    <div v-if="!searching">
+      <h2 class="result__title">「{{ searchText }}」の検索結果</h2>
+      <ul v-if="places.length">
+        <li class="result__item" v-for="place, i in places" :key="i">
+          <SearchResultItem :place="place" @fav="toggleFav" :is-fav="isFav(place)"/>
+        </li>
+      </ul>
+      <div v-else class="result__noitem">該当する地名が見つかりませんでした</div>
+    </div>
+    <div v-else class="result__loading">
+      検索中...
+    </div>
   </div>
 </template>
 
@@ -21,7 +27,7 @@ const props = defineProps<{
 }>();
 
 const places = ref<Place[]>([]);
-const { search } = useSearch();
+const { search, searching } = useSearch();
 const { toggle: toggleFav, isFav } = useFav();
 
 watch(() => props.searchText, async (v) => {
@@ -48,6 +54,14 @@ watch(() => props.searchText, async (v) => {
   &__item {
     margin: 0.5rem 0;
     list-style: none;
+  }
+
+  &__noitem {
+    margin-top: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
   }
 }
 </style>

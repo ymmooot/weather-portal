@@ -1,3 +1,4 @@
+import { ref } from "vue";
 import { useLocalStorage } from "@vueuse/core";
 
 export type Place = {
@@ -36,9 +37,13 @@ export const useSearch = () => {
     new Map<string, Place[]>(),
   );
   const history = useHistory();
+  const searching = ref(false);
   const search = async (query: string): Promise<Place[]> => {
+    searching.value = true;
+
     if (store.value.has(query)) {
       history.add(query);
+      searching.value = false;
       return store.value.get(query)!;
     }
 
@@ -47,7 +52,10 @@ export const useSearch = () => {
         encodeURIComponent(query)
       }`,
     );
-    if (!response.ok) return [];
+    if (!response.ok) {
+      searching.value = false;
+      return [];
+    }
     const res = await response.json();
 
     // deno-lint-ignore no-explicit-any
@@ -65,8 +73,9 @@ export const useSearch = () => {
       history.add(query);
     }
 
+    searching.value = false;
     return places;
   };
 
-  return { search, history };
+  return { search, history, searching };
 };
