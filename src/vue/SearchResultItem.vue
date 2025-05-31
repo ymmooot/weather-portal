@@ -7,6 +7,7 @@
       </div>
       <p class="item__detail">{{ detail }}</p>
       <p class="item__latlon">{{ place.lat }} / {{ place.lon }}</p>
+      <HtmlComment :text="place.place_id" />
     </div>
     <div class="item__actions">
       <a
@@ -56,6 +57,7 @@
 import { computed } from "vue";
 import Card from "./Card.vue";
 import StarIcon from "./StarIcon.vue";
+import HtmlComment from "./HtmlComment.vue";
 import { type Place } from "../search";
 import { getYamatenID } from "../yamaten";
 
