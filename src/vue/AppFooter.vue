@@ -3,7 +3,7 @@
     <p class="footer__text">
       Created by
       <a
-        href="https://github.com/ymmooot"
+        href="https://github.com/ymmooot/weather-portal"
         target="_blank"
         rel="noopener noreferrer"
       >ymmooot</a>

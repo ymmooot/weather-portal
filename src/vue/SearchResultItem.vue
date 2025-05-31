@@ -15,7 +15,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src="/scw.png" alt="scw"><span>SCW</span>
+        <img src="/scw.png" alt="scw"><span class="item__action-text">SCW</span>
       </a>
       <a
         class="item__action-button"
@@ -23,7 +23,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src="/windy.png" alt="Windy"><span>Windy</span>
+        <img src="/windy.png" alt="Windy"><span class="item__action-text">Windy</span>
       </a>
       <a
         class="item__action-button"
@@ -31,7 +31,16 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <img src="/wn.svg" alt="ウェザーニュース"><span>WN</span>
+        <img src="/wn.svg" alt="ウェザーニュース"><span class="item__action-text">WN</span>
+      </a>
+      <a
+        v-if="yamatenLink"
+        class="item__action-button"
+        :href="yamatenLink"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src="/yamaten.jpg" alt="ヤマテン"><span class="item__action-text">ヤマテン</span>
       </a>
     </div>
 
@@ -44,10 +53,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import Card from "./Card.vue";
 import StarIcon from "./StarIcon.vue";
 import { type Place } from "../search";
+import { getYamatenID } from "../yamaten";
 
 const props = defineProps<{
   place: Place;
@@ -77,6 +87,17 @@ const windyLink = computed((): string => {
 });
 const weatherNewsLink = computed(() => {
   return `https://weathernews.jp/onebox/${props.place.lat}/${props.place.lon}`;
+});
+
+const yamatenLink = computed((): string | null => {
+  const mountainID = getYamatenID({
+    lat: props.place.lat,
+    lon: props.place.lon,
+  });
+  if (!mountainID) {
+    return null;
+  }
+  return mountainID ? `https://i.yamatenki.co.jp/mountain?mid=${mountainID}` : null;
 });
 </script>
 
@@ -125,11 +146,12 @@ const weatherNewsLink = computed(() => {
     align-items: center;
     justify-content: flex-start;
     margin-top: 0.5rem;
+    overflow-x: auto;
   }
 
   &__action-button {
     display: inline-flex;
-    gap: 8px;
+    gap: 6px;
     align-items: center;
     padding: 0.4rem 0.6rem;
     font-size: 0.8rem;
@@ -147,6 +169,12 @@ const weatherNewsLink = computed(() => {
     &:hover {
       opacity: 0.8;
     }
+  }
+
+  &__action-text {
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
   }
 
   &__star {

@@ -1,6 +1,8 @@
 {
   "version": "5",
   "specifiers": {
+    "npm:@turf/distance@^7.2.0": "7.2.0",
+    "npm:@turf/helpers@^7.2.0": "7.2.0",
     "npm:@vitejs/plugin-vue@*": "5.2.4_vite@6.3.5__picomatch@4.0.2_vue@3.5.16_sass-embedded@1.89.0",
     "npm:@vueuse/core@^13.3.0": "13.3.0_vue@3.5.16",
     "npm:sass-embedded@^1.89.0": "1.89.0",
@@ -319,8 +321,35 @@
       "os": ["win32"],
       "cpu": ["x64"]
     },
+    "@turf/distance@7.2.0": {
+      "integrity": "sha512-HBjjXIgEcD/wJYjv7/6OZj5yoky2oUvTtVeIAqO3lL80XRvoYmVg6vkOIu6NswkerwLDDNT9kl7+BFLJoHbh6Q==",
+      "dependencies": [
+        "@turf/helpers",
+        "@turf/invariant",
+        "@types/geojson",
+        "tslib"
+      ]
+    },
+    "@turf/helpers@7.2.0": {
+      "integrity": "sha512-cXo7bKNZoa7aC7ydLmUR02oB3IgDe7MxiPuRz3cCtYQHn+BJ6h1tihmamYDWWUlPHgSNF0i3ATc4WmDECZafKw==",
+      "dependencies": [
+        "@types/geojson",
+        "tslib"
+      ]
+    },
+    "@turf/invariant@7.2.0": {
+      "integrity": "sha512-kV4u8e7Gkpq+kPbAKNC21CmyrXzlbBgFjO1PhrHPgEdNqXqDawoZ3i6ivE3ULJj2rSesCjduUaC/wyvH/sNr2Q==",
+      "dependencies": [
+        "@turf/helpers",
+        "@types/geojson",
+        "tslib"
+      ]
+    },
     "@types/estree@1.0.7": {
       "integrity": "sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ=="
+    },
+    "@types/geojson@7946.0.16": {
+      "integrity": "sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg=="
     },
     "@types/web-bluetooth@0.0.21": {
       "integrity": "sha512-oIQLCGWtcFZy2JW77j9k8nHzAOpqMHLQejDA48XXMWH6tjCQHz5RCFz1bzsmROyL6PUm+LLnUiI4BCn221inxA=="
@@ -1404,6 +1433,8 @@
   },
   "workspace": {
     "dependencies": [
+      "npm:@turf/distance@^7.2.0",
+      "npm:@turf/helpers@^7.2.0",
       "npm:@vueuse/core@^13.3.0",
       "npm:sass-embedded@^1.89.0",
       "npm:stylelint-config-recess-order@6",

@@ -7,8 +7,8 @@ export type Place = {
   name: string;
   display_name: string;
   addresstype: string;
-  lat: string;
-  lon: string;
+  lat: number;
+  lon: number;
 };
 
 export const useHistory = () => {

@@ -2,7 +2,7 @@
   <Card class="search">
     <form @submit.prevent="search" class="search__form">
       <input
-        type="text"
+        type="search"
         placeholder="Where?"
         v-model.trim="searchText"
         class="search__input"
@@ -56,6 +56,12 @@ const search = () => {
       outline: none;
       border-color: #29ca5f;
     }
+  }
+
+  &__input::-webkit-search-cancel-button {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
   }
 
   &__button {
