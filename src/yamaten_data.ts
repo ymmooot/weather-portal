@@ -26,16 +26,16 @@ export const mountains: YamatenItem[] = [
   {
     mid: "107",
     name: "十勝岳",
-    lat: undefined,
-    lon: undefined,
-    place_id: undefined,
+    lat: 43.4178911,
+    lon: 142.6862989,
+    place_id: "250089542",
   },
   {
     mid: "117",
     name: "朝日岳",
-    lat: undefined,
-    lon: undefined,
-    place_id: undefined,
+    lat: 38.2605500,
+    lon: 139.9223257,
+    place_id: "241246564",
   },
   {
     mid: "119",
@@ -54,9 +54,9 @@ export const mountains: YamatenItem[] = [
   {
     mid: "126",
     name: "平ヶ岳",
-    lat: undefined,
-    lon: undefined,
-    place_id: undefined,
+    lat: 37.0022277,
+    lon: 139.1708614,
+    place_id: "241431117",
   },
   {
     mid: "128",
@@ -181,9 +181,9 @@ export const mountains: YamatenItem[] = [
   {
     mid: "157",
     name: "笠ヶ岳",
-    lat: undefined,
-    lon: undefined,
-    place_id: undefined,
+    lat: 36.6766713,
+    lon: 138.4814644,
+    place_id: "241906550,",
   },
   {
     mid: "158",
@@ -224,9 +224,9 @@ export const mountains: YamatenItem[] = [
   {
     mid: "166",
     name: "雲取山",
-    lat: undefined,
-    lon: undefined,
-    place_id: undefined,
+    lat: 35.8555351,
+    lon: 138.9439287,
+    place_id: "245769366",
   },
   {
     mid: "167",
@@ -381,16 +381,16 @@ export const mountains: YamatenItem[] = [
   {
     mid: "192",
     name: "大山",
-    lat: undefined,
-    lon: undefined,
-    place_id: undefined,
+    lat: 35.3711876,
+    lon: 133.5431666,
+    place_id: "246561227",
   },
   {
     mid: "194",
     name: "石鎚山",
-    lat: undefined,
-    lon: undefined,
-    place_id: undefined,
+    lat: 33.7677799,
+    lon: 133.1151038,
+    place_id: "247978907",
   },
   {
     mid: "195",
@@ -417,9 +417,9 @@ export const mountains: YamatenItem[] = [
     mid: "201",
     name: "朝日岳",
     subname: "北ア",
-    lat: undefined,
-    lon: undefined,
-    place_id: undefined,
+    lat: 36.8267572,
+    lon: 137.7298807,
+    place_id: "242697830",
   },
   {
     mid: "1002",
@@ -1528,9 +1528,9 @@ export const mountains: YamatenItem[] = [
   {
     mid: "1196",
     name: "高尾山",
-    lat: undefined,
-    lon: undefined,
-    place_id: undefined,
+    lat: 35.6252267,
+    lon: 139.2436878,
+    place_id: "243321067",
   },
   {
     mid: "1197",
@@ -1737,7 +1737,7 @@ export const mountains: YamatenItem[] = [
   },
   {
     mid: "1239",
-    name: "笈ヶ岳 ",
+    name: "笈ヶ岳",
     lat: 36.2985317,
     lon: 136.7922028,
     place_id: "242633261",
