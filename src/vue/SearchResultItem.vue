@@ -10,20 +10,10 @@
       <HtmlComment :text="place.place_id" />
     </div>
     <div class="item__actions">
-      <a
-        class="item__action-button"
-        :href="scwLink"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a class="item__action-button" :href="scwLink" target="_blank" rel="noopener noreferrer">
         <img src="/scw.png" alt="scw"><span class="item__action-text">SCW</span>
       </a>
-      <a
-        class="item__action-button"
-        :href="windyLink"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <a class="item__action-button" :href="windyLink" target="_blank" rel="noopener noreferrer">
         <img src="/windy.png" alt="Windy"><span class="item__action-text">Windy</span>
       </a>
       <a
@@ -45,11 +35,7 @@
       </a>
     </div>
 
-    <StarIcon
-      class="item__star"
-      :active="isFav ?? false"
-      @click='emit("fav", place)'
-    />
+    <StarIcon class="item__star" :active="isFav ?? false" @click='emit("fav", place)' />
   </Card>
 </template>
 
@@ -71,14 +57,19 @@ const emit = defineEmits<{
 }>();
 
 const detail = computed((): string => {
-  // 最後の「, 日本」を削除
   if (!props.place.display_name) {
     return "";
   }
-  if (props.place.display_name.endsWith("日本")) {
-    return props.place.display_name.slice(0, -4);
+  // 最後の「, 日本」を削除
+  if (!props.place.display_name.endsWith("日本")) {
+    return "";
   }
-  return props.place.display_name || "";
+  const parts = props.place.display_name
+    .split(", ")
+    .slice(0, -1)
+    .filter((part) => part !== "日本")
+    .filter((part) => !/^\d{3}-\d{4}$/.test(part)); // 郵便番号を除外
+  return parts.reverse().join(" ");
 });
 
 const scwLink = computed((): string => {
