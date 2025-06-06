@@ -62,15 +62,8 @@ watch(menuOpened, (v) => {
 const favListOpened = ref(false);
 watch(favListOpened, (v) => {
   isWindowScollLocked.value = v;
-
-  // --- URL hash and history control ---
-  // - When favListOpened becomes true (open), location.hash = '#fav' adds one entry to the browser history
-  // - When favListOpened becomes false (close), history.replaceState removes the hash without adding to history
-  // - As a result, only the transition from "no hash" to "#fav" is recorded in history, and repeated open/close does not increase history entries
   if (v) {
-    if (location.hash !== "#fav") {
-      location.hash = "#fav";
-    }
+    history.pushState(null, "", location.pathname + "#fav");
   } else {
     history.replaceState(null, "", location.pathname);
   }

@@ -29,7 +29,7 @@ defineEmits<{
 }>();
 
 onMounted(() => {
-  (document.activeElement as HTMLInputElement)?.blur();
+  document.querySelector("input")?.blur();
 });
 
 /* share button */
