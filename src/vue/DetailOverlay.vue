@@ -1,21 +1,26 @@
 <template>
-  <div class="detail">
+  <div class="detail" :class="activeBreakpoint">
     <div class="detail__inner">
       <SearchResultItem class="detail__card" :place="place" @fav="toggle" :is-fav="isFav(place)" />
-      <button class="detail__close batsu" @click='$emit("close")'></button>
+      <div class="detail__actions">
+        <button v-if="showShareButton" class="detail__share" @click="share">Share</button>
+        <button class="detail__close batsu" @click='$emit("close")'></button>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { computed, onMounted } from "vue";
+import { useBreakpoints } from "@vueuse/core";
+
 import SearchResultItem from "./SearchResultItem.vue";
 import { type Place } from "../search";
 import { useFav } from "../fav";
 
 const { isFav, toggle } = useFav();
 
-defineProps<{
+const props = defineProps<{
   place: Place;
 }>();
 
@@ -26,6 +31,30 @@ defineEmits<{
 onMounted(() => {
   (document.activeElement as HTMLInputElement)?.blur();
 });
+
+/* share button */
+const breakpoints = useBreakpoints({
+  mobile: 0,
+  tablet: 800,
+});
+const activeBreakpoint = breakpoints.active();
+// show share button only on mobile size
+const showShareButton = breakpoints.smallerOrEqual("tablet");
+
+const shareData = computed(() => {
+  const baseUrl = window.location.origin + window.location.pathname;
+  return {
+    title: props.place.name,
+    url: `${baseUrl}/?id=${props.place.osm_id}`,
+  };
+});
+
+const share = async () => {
+  if (!navigator.share || !navigator.canShare(shareData.value)) {
+    return;
+  }
+  await navigator.share(shareData.value);
+};
 </script>
 
 <style scoped lang="scss">
@@ -51,10 +80,27 @@ onMounted(() => {
     max-width: 800px;
   }
 
+  &__actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  &__share {
+    height: 36px;
+    padding: 0 16px;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    border-radius: 6px;
+  }
+
   &__close {
     width: 36px;
     height: 36px;
-    margin-top: 10px;
     cursor: pointer;
     background-color: white;
     border: none;
