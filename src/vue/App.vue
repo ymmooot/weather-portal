@@ -24,6 +24,8 @@
         @select="onSelect"
       />
     </Transition>
+
+    <DetailOverlay v-if="place" :place="place" @close="clearID" />
   </div>
 </template>
 
@@ -38,6 +40,10 @@ import SearchResult from "./SearchResult.vue";
 import SideOverlay from "./SideOverlay.vue";
 import FavListOverlay from "./FavListOverlay.vue";
 import StarIcon from "./StarIcon.vue";
+import DetailOverlay from "./DetailOverlay.vue";
+import { useDetail } from "../detail";
+
+const { place, clearID } = useDetail();
 
 const searchText = ref("");
 const isWindowScollLocked = useScrollLock(window);

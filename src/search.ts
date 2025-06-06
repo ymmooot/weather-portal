@@ -4,6 +4,7 @@ import { searchQueryCacheKey, searchResultCacheKey } from "./const.ts";
 
 export type Place = {
   place_id: string;
+  osm_id: string;
   name: string;
   display_name: string;
   addresstype: string;
@@ -31,6 +32,25 @@ export const useHistory = () => {
 };
 
 const isJapan = (detail: string) => detail.endsWith("日本");
+const resToPlace = (item: any): Place => {
+  const p = {
+    place_id: item.place_id.toString(),
+    osm_id: item.osm_id.toString(),
+    name: item.name,
+    display_name: item.display_name,
+    addresstype: item.type,
+    lat: item.lat,
+    lon: item.lon,
+  };
+  if (!p.name) {
+    p.name = item.names?.name;
+  }
+  if (!item.lat) {
+    p.lon = item.geometry?.coordinates[0];
+    p.lat = item.geometry?.coordinates[1];
+  }
+  return p as Place;
+};
 
 export const useSearch = () => {
   const store = useLocalStorage(
@@ -58,14 +78,7 @@ export const useSearch = () => {
     const res = await response.json();
 
     // deno-lint-ignore no-explicit-any
-    const places = res.map((item: any) => ({
-      place_id: item.place_id.toString(),
-      name: item.name,
-      display_name: item.display_name,
-      addresstype: item.type,
-      lat: item.lat,
-      lon: item.lon,
-    })).filter((place: Place) => isJapan(place.display_name));
+    const places = res.map(resToPlace).filter((place: Place) => isJapan(place.display_name));
 
     store.value.set(query, places);
     if (places.length > 0) {
@@ -76,5 +89,20 @@ export const useSearch = () => {
     return places;
   };
 
-  return { search, history, searching };
+  const searchByID = async (osmID: string): Promise<Place | null> => {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/details?osmtype=N&osmid=${osmID}&addressdetails=1&hierarchy=0&group_hierarchy=1&format=json`,
+      );
+      if (!response.ok) {
+        return null;
+      }
+      const res = await response.json();
+      return resToPlace(res);
+    } catch {
+      return null;
+    }
+  };
+
+  return { search, history, searching, searchByID };
 };

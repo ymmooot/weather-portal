@@ -7,7 +7,7 @@
       </div>
       <p class="item__detail">{{ detail }}</p>
       <p class="item__latlon">{{ place.lat }} / {{ place.lon }}</p>
-      <HtmlComment :text="place.place_id" />
+      <HtmlComment :text="place.osm_id" />
     </div>
     <div class="item__actions">
       <a class="item__action-button" :href="scwLink" target="_blank" rel="noopener noreferrer">
@@ -135,11 +135,11 @@ const yamatenLink = computed((): string | null => {
 
   &__actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
     align-items: center;
     justify-content: flex-start;
     margin-top: 0.5rem;
-    overflow-x: auto;
   }
 
   &__action-button {
