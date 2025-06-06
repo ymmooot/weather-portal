@@ -6,24 +6,26 @@ const isValidNumber = (value: string): boolean => !isNaN(Number(value)) && Numbe
 
 export const useDetail = () => {
   const place = ref<Place | null>(null);
-  const params = useUrlSearchParams();
-  const id = Array.isArray(params.id) ? params.id[0] : params.id;
+  const params = useUrlSearchParams("history", {
+    writeMode: "push",
+  });
   const clearID = () => {
     delete params.id;
     place.value = null;
   };
 
   const { searchByID } = useSearch();
-  watch(() => id, async (newId) => {
-    if (!newId) {
+  watch(() => params.id, async (newId) => {
+    const id = Array.isArray(newId) ? newId[0] : newId;
+    if (!id) {
       place.value = null;
       return;
     }
-    if (!isValidNumber(newId)) {
+    if (!isValidNumber(id)) {
       place.value = null;
       return;
     }
-    place.value = await searchByID(newId);
+    place.value = await searchByID(id);
   }, { immediate: true });
 
   return {

@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { useLocalStorage } from "@vueuse/core";
-import { searchQueryCacheKey, searchResultCacheKey } from "./const.ts";
+import { searchByIDResultCacheKey, searchQueryCacheKey, searchResultCacheKey } from "./const.ts";
 
 export type Place = {
   place_id: string;
@@ -89,16 +89,27 @@ export const useSearch = () => {
     return places;
   };
 
+  const storeForID = useLocalStorage(
+    searchByIDResultCacheKey,
+    new Map<string, Place>(),
+  );
+
   const searchByID = async (osmID: string): Promise<Place | null> => {
+    if (storeForID.value.has(osmID)) {
+      return storeForID.value.get(osmID)!;
+    }
+
     try {
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/details?osmtype=N&osmid=${osmID}&addressdetails=1&hierarchy=0&group_hierarchy=1&format=json`,
+        `https://nominatim.openstreetmap.org/details?osmtype=N&osmid=${osmID}&addressdetails=0&hierarchy=0&group_hierarchy=1&format=json`,
       );
       if (!response.ok) {
         return null;
       }
       const res = await response.json();
-      return resToPlace(res);
+      const place = resToPlace(res);
+      storeForID.value.set(osmID, place);
+      return place;
     } catch {
       return null;
     }
