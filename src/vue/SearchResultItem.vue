@@ -33,6 +33,20 @@
       >
         <img src="/yamaten.jpg" alt="ヤマテン"><span class="item__action-text">ヤマテン</span>
       </a>
+      <button v-if="canShare" class="item__action-button" @click="share">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+          <polyline points="16 6 12 2 8 6" />
+          <line x1="12" x2="12" y1="2" y2="15" />
+        </svg><span class="item__action-text">共有</span>
+      </button>
     </div>
 
     <StarIcon class="item__star" :active="isFav ?? false" @click='emit("fav", place)' />
@@ -81,6 +95,21 @@ const windyLink = computed((): string => {
 const weatherNewsLink = computed(() => {
   return `https://weathernews.jp/onebox/${props.place.lat}/${props.place.lon}`;
 });
+
+const canShare = typeof navigator.share === "function";
+const share = async () => {
+  const url = new URL(window.location.origin + window.location.pathname);
+  // 古いキャッシュ済みデータには osm_type がないので Node 扱いにフォールバック
+  url.searchParams.set("id", `${props.place.osm_type ?? "N"}${props.place.osm_id}`);
+  const data = {
+    title: props.place.name,
+    url: url.toString(),
+  };
+  if (navigator.canShare && !navigator.canShare(data)) {
+    return;
+  }
+  await navigator.share(data);
+};
 
 const yamatenLink = computed((): string | null => {
   const mountainID = getYamatenID({
@@ -150,10 +179,13 @@ const yamatenLink = computed((): string | null => {
     font-size: 0.8rem;
     color: #666;
     text-decoration: none;
+    cursor: pointer;
+    background: none;
     border: 1px solid #ccc;
     border-radius: 4px;
 
-    img {
+    img,
+    svg {
       width: 1.2rem;
       height: 1.2rem;
       vertical-align: middle;

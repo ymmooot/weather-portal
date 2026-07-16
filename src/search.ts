@@ -5,6 +5,7 @@ import { searchByIDResultCacheKey, searchQueryCacheKey, searchResultCacheKey } f
 export type Place = {
   place_id: string;
   osm_id: string;
+  osm_type: string; // "N" | "W" | "R"
   name: string;
   display_name: string;
   addresstype: string;
@@ -43,6 +44,8 @@ const resToPlace = (item: any): Place => {
   const p = {
     place_id: item.place_id.toString(),
     osm_id: item.osm_id.toString(),
+    // search APIは "node" 等、details APIは "N" 等を返すので先頭1文字に正規化
+    osm_type: (item.osm_type ?? "N").charAt(0).toUpperCase(),
     name: item.name,
     display_name: item.display_name,
     addresstype: item.type,
@@ -101,14 +104,21 @@ export const useSearch = () => {
     new Map<string, Place>(),
   );
 
+  // osmID は "N123" のようにタイプ接頭辞付き。数字のみの場合は従来どおり Node として扱う
   const searchByID = async (osmID: string): Promise<Place | null> => {
     if (storeForID.value.has(osmID)) {
       return storeForID.value.get(osmID)!;
     }
 
+    const matched = osmID.match(/^([NWR])?(\d+)$/);
+    if (!matched) {
+      return null;
+    }
+    const [, osmType = "N", id] = matched;
+
     try {
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/details?osmtype=N&osmid=${osmID}&addressdetails=0&hierarchy=0&group_hierarchy=1&format=json`,
+        `https://nominatim.openstreetmap.org/details?osmtype=${osmType}&osmid=${id}&addressdetails=0&hierarchy=0&group_hierarchy=1&format=json`,
       );
       if (!response.ok) {
         return null;

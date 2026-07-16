@@ -2,7 +2,7 @@ import { ref, watch } from "vue";
 import { useUrlSearchParams } from "@vueuse/core";
 import { Place, useSearch } from "./search";
 
-const isValidNumber = (value: string): boolean => !isNaN(Number(value)) && Number(value) >= 0;
+const isValidID = (value: string): boolean => /^[NWR]?\d+$/.test(value);
 
 export const useDetail = () => {
   const place = ref<Place | null>(null);
@@ -21,7 +21,7 @@ export const useDetail = () => {
       place.value = null;
       return;
     }
-    if (!isValidNumber(id)) {
+    if (!isValidID(id)) {
       place.value = null;
       return;
     }
