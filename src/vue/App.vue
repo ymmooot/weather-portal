@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { useScrollLock } from "@vueuse/core";
+import { onKeyStroke, useScrollLock } from "@vueuse/core";
 
 import AppHeader from "./AppHeader.vue";
 import AppFooter from "./AppFooter.vue";
@@ -64,6 +64,11 @@ watch(favListOpened, (v) => {
     history.pushState(null, "", location.pathname + "#fav");
   } else {
     history.replaceState(null, "", location.pathname);
+  }
+});
+onKeyStroke("Escape", () => {
+  if (favListOpened.value) {
+    favListOpened.value = false;
   }
 });
 const syncFavWithHash = () => {
