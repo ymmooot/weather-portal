@@ -67,7 +67,7 @@ const favList = computed(() => get());
   &__list {
     max-width: 800px;
     padding: 0 1rem;
-    margin: 0 auto;
+    margin: 1rem auto 0;
   }
 
   &__item {
