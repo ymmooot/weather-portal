@@ -3,12 +3,6 @@
     <div class="overlay" v-show="show" @click='$emit("close")'>
       <Transition name="slide">
         <div class="menu" v-show="show" @click.stop>
-          <p class="menu__title">検索履歴</p>
-          <ul class="menu__history">
-            <li v-for="(item, i) in histories" :key="i" @click='$emit("select", item)'>
-              <p class="menu__history-item">{{ item }}</p>
-            </li>
-          </ul>
           <div class="menu__actions">
             <button class="menu__clear" @click="clear">
               キャッシュをクリア
@@ -21,17 +15,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
 import { useLocalStorage } from "@vueuse/core";
-import { useHistory } from "../search";
 import { allCacheKeys } from "../const";
 
 defineProps<{
   show: boolean;
 }>();
-
-const { get } = useHistory();
-const histories = computed(() => get());
 
 const clear = () => {
   const ok = window.confirm(
@@ -62,42 +51,16 @@ const clear = () => {
   width: 80%;
   max-width: 300px;
   height: 100%;
+  padding-top: 50px; // AppHeader と同じ高さ
   overflow-y: auto;
   overscroll-behavior-y: none;
   background-color: #fff;
-
-  &__title {
-    padding: 0.8rem;
-    font-size: 1rem;
-    font-style: normal;
-    font-optical-sizing: auto;
-    text-align: center;
-    border-bottom: 1px solid #d8d8d8;
-  }
-
-  &__history {
-    padding: 0 1.4rem;
-  }
-
-  &__history-item {
-    padding: 0.8rem;
-    font-size: 0.9rem;
-    font-style: normal;
-    font-optical-sizing: auto;
-    color: #333;
-    cursor: pointer;
-    border-bottom: 1px solid #d8d8d8;
-
-    &:hover {
-      background-color: #f0f0f0;
-    }
-  }
 
   &__actions {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 1rem;
+    padding: 1rem 0;
   }
 
   &__clear {

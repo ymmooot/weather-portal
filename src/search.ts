@@ -25,9 +25,16 @@ export const useHistory = () => {
   const get = () => {
     return store.value;
   };
+  const remove = (query: string) => {
+    const idx = store.value.indexOf(query);
+    if (idx !== -1) {
+      store.value.splice(idx, 1);
+    }
+  };
   return {
     add,
     get,
+    remove,
   };
 };
 

@@ -3,15 +3,12 @@
     <AppHeader title="Weather Portal" v-model="menuOpened" />
     <main class="app__main">
       <SearchForm v-model="searchText" />
-      <SearchResult :search-text="searchText" v-if="searchText" />
+      <SearchResult :search-text="searchText" v-if="searchText" @clear='searchText = ""' />
+      <SearchHistory v-else @select="searchText = $event" />
     </main>
     <AppFooter class="app__footer" />
 
-    <SideOverlay
-      :show="menuOpened"
-      @close="menuOpened = false"
-      @select="onSelect"
-    />
+    <SideOverlay :show="menuOpened" @close="menuOpened = false" />
 
     <!-- Fav -->
     <button class="app__fav" @click="favListOpened = true">
@@ -37,6 +34,7 @@ import AppHeader from "./AppHeader.vue";
 import AppFooter from "./AppFooter.vue";
 import SearchForm from "./SearchForm.vue";
 import SearchResult from "./SearchResult.vue";
+import SearchHistory from "./SearchHistory.vue";
 import SideOverlay from "./SideOverlay.vue";
 import FavListOverlay from "./FavListOverlay.vue";
 import StarIcon from "./StarIcon.vue";
