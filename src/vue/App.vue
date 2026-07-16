@@ -4,6 +4,7 @@
     <main class="app__main">
       <SearchForm v-model="searchText" />
       <SearchResult :search-text="searchText" v-if="searchText" @clear='searchText = ""' />
+      <SharedPlace v-else-if="place" :place="place" @close="clearID" />
       <SearchHistory v-else @select="searchText = $event" />
     </main>
     <AppFooter class="app__footer" />
@@ -22,7 +23,6 @@
       />
     </Transition>
 
-    <DetailOverlay v-if="place" :place="place" @close="clearID" />
   </div>
 </template>
 
@@ -38,12 +38,18 @@ import SearchHistory from "./SearchHistory.vue";
 import SideOverlay from "./SideOverlay.vue";
 import FavListOverlay from "./FavListOverlay.vue";
 import StarIcon from "./StarIcon.vue";
-import DetailOverlay from "./DetailOverlay.vue";
+import SharedPlace from "./SharedPlace.vue";
 import { useDetail } from "../detail";
 
 const { place, clearID } = useDetail();
 
 const searchText = ref("");
+// 検索を始めたら共有された場所の表示は解除する
+watch(searchText, (v) => {
+  if (v && place.value) {
+    clearID();
+  }
+});
 const isWindowScollLocked = useScrollLock(window);
 
 // --- Side Menu Overlay ---
