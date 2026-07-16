@@ -33,23 +33,23 @@
       >
         <img src="/yamaten.jpg" alt="ヤマテン"><span class="item__action-text">ヤマテン</span>
       </a>
-      <button v-if="canShare" class="item__action-button" @click="share">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
-          <polyline points="16 6 12 2 8 6" />
-          <line x1="12" x2="12" y1="2" y2="15" />
-        </svg><span class="item__action-text">共有</span>
-      </button>
     </div>
 
     <StarIcon class="item__star" :active="isFav ?? false" @click='emit("fav", place)' />
+    <button v-if="canShare" class="item__share" aria-label="共有" @click="share">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+        <polyline points="16 6 12 2 8 6" />
+        <line x1="12" x2="12" y1="2" y2="15" />
+      </svg>
+    </button>
   </Card>
 </template>
 
@@ -179,13 +179,10 @@ const yamatenLink = computed((): string | null => {
     font-size: 0.8rem;
     color: #666;
     text-decoration: none;
-    cursor: pointer;
-    background: none;
     border: 1px solid #ccc;
     border-radius: 4px;
 
-    img,
-    svg {
+    img {
       width: 1.2rem;
       height: 1.2rem;
       vertical-align: middle;
@@ -209,6 +206,28 @@ const yamatenLink = computed((): string | null => {
     width: 20px;
     height: 20px;
     cursor: pointer;
+  }
+
+  &__share {
+    position: absolute;
+    top: 0.7rem;
+    right: calc(0.7rem + 20px + 14px);
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    color: #888;
+    cursor: pointer;
+    background: none;
+    border: none;
+
+    &:hover {
+      color: #333;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>
