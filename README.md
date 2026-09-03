@@ -9,8 +9,9 @@
 
 [ymmooot.github.io/weather-portal](https://ymmooot.github.io/weather-portal/)
 
-You can search for place names and get direct links to [Windy](https://windy.com),
-[SCW](https://supercweather.com/), and [WN](https://weathernews.jp/) for the selected location.
+Search for a place name and get direct links to [Windy](https://windy.com),
+[SCW](https://supercweather.com/), [WN](https://weathernews.jp/), and other weather services for
+that location.
 
 # Dev
 
