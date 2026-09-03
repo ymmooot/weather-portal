@@ -25,6 +25,15 @@
         <img src="/wn.svg" alt="ウェザーニュース"><span class="item__action-text">WN</span>
       </a>
       <a
+        v-if="settings.shadeMap"
+        class="item__action-button"
+        :href="shadeMapLink"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src="/shademap.png" alt="ShadeMap"><span class="item__action-text">ShadeMap</span>
+      </a>
+      <a
         v-if="yamatenLink"
         class="item__action-button"
         :href="yamatenLink"
@@ -60,6 +69,7 @@ import StarIcon from "./StarIcon.vue";
 import HtmlComment from "./HtmlComment.vue";
 import { type Place } from "../search";
 import { getYamatenID } from "../yamaten";
+import { useSettings } from "../settings";
 
 const props = defineProps<{
   place: Place;
@@ -69,6 +79,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: "fav", placeID: Place): void;
 }>();
+
+const { settings } = useSettings();
 
 const detail = computed((): string => {
   if (!props.place.display_name) {
@@ -94,6 +106,9 @@ const windyLink = computed((): string => {
 });
 const weatherNewsLink = computed(() => {
   return `https://weathernews.jp/onebox/${props.place.lat}/${props.place.lon}`;
+});
+const shadeMapLink = computed((): string => {
+  return `https://shademap.app/@${props.place.lat},${props.place.lon},15z`;
 });
 
 const canShare = typeof navigator.share === "function";
