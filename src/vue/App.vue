@@ -88,13 +88,13 @@ syncFavWithHash();
 .app {
   &__main {
     max-width: 800px;
-    min-height: calc(100dvh - 110px); // 50px header + 60px footer
+    min-height: calc(100dvh - 130px); // 50px header + 80px footer
     padding: 1rem;
     margin: 0 auto;
   }
 
   &__footer {
-    height: 60px;
+    height: 80px;
   }
 
   &__fav {

@@ -8,6 +8,19 @@
         rel="noopener noreferrer"
       >ymmooot</a>
     </p>
+    <p class="footer__attribution">
+      Place search powered by
+      <a
+        href="https://nominatim.openstreetmap.org/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Nominatim</a>, data ©
+      <a
+        href="https://www.openstreetmap.org/copyright"
+        target="_blank"
+        rel="noopener noreferrer"
+      >OpenStreetMap contributors</a>
+    </p>
     <p class="footer__version">Version: {{ commitHash }}</p>
   </footer>
 </template>
@@ -26,6 +39,13 @@ const commitHash = __COMMIT_HASH__;
 
   &__text {
     font-size: 0.8rem;
+  }
+
+  &__attribution {
+    margin-top: 4px;
+    font-size: 0.6rem;
+    color: #999;
+    text-align: center;
   }
 
   &__version {
