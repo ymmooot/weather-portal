@@ -102,7 +102,7 @@ const scwLink = computed((): string => {
   return `https://supercweather.com/?lat=${props.place.lat}&lng=${props.place.lon}`;
 });
 const windyLink = computed((): string => {
-  return `https://www.windy.com/${props.place.lat}/${props.place.lon}`;
+  return `https://www.windy.com/${props.place.lat}/${props.place.lon}?${props.place.lat},${props.place.lon},11`;
 });
 const weatherNewsLink = computed(() => {
   return `https://weathernews.jp/onebox/${props.place.lat}/${props.place.lon}`;
